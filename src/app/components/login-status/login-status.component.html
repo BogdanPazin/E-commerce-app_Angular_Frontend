@@ -1,0 +1,22 @@
+<ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
+
+    <div style="display:flex; align-items: center; justify-content: space-between; min-width: 500px;">
+    <div *ngIf="auth.user$ | async as user" class="col-md-6"   >
+       Hello <strong>{{user.name}}</strong>
+    </div>
+
+    <button class="au-btn-submit py-2 col-md-2" (click)="logout()">
+            Log out
+    </button>
+    <!-- <button routerLink="/members" class="au-btn-submit py-2 col-md-2 mx-2">
+        Member
+    </button> 
+    <button routerLink="/order-history" class="au-btn-submit py-2 col-md-2 ">
+        Orders
+    </button>    -->
+</div>
+</ng-container>
+
+<ng-template #loggedOut>
+    <button class="au-btn-submit py-2" (click)="loginWithRedirect()">Log in</button> 
+</ng-template>

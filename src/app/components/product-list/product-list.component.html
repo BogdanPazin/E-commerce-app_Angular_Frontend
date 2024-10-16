@@ -1,0 +1,4 @@
+<!-- products JE ATRIBUT IZ .ts FAJLA -->
+<p *ngFor="let product of products">
+    {{ product.name }}: {{ product.unitPrice | currency:'USD' }}
+</p>
