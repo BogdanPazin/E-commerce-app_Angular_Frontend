@@ -17,12 +17,8 @@ import { Purchase } from '../../common/purchase';
   styleUrl: './checkout.component.css'
 })
 export class CheckoutComponent implements OnInit {
-  
-  // FORM GROUP JE KOLEKCIJA KONTROLA FORME OD ELEMENATA FORME ILI KOLEKCIJA DRUGIH GRUPA
   checkoutFormGroup: FormGroup = undefined!;
 
-  // RADIO SAM ISTO SA OVOM KOMPONENTOM I CART SERVICE-OM KAO STO JE RADJENO SA CART STATUS KOMPONENTOM I CART SERVICE-OM VEZANO ZA UKUPNU CENU I KOLICINU
-  // ALI POSTO JE OVA KOMPONENTA NAPRAVLJENA POSLE CART STATUS KOMPONENTE ONA NECE DA PRIMI PRETHODNE VREDNOSTI AKO SU UKUPNA CENA I KOLICINA U CART SERVICE-U STAVLJENE KAO OBICAN SUBJECT OBJEKAT, VEC MOZE DA SE PROMENI TIP TOG SUBJECT-A NA BEHAVIOR I REPLAY
   totalPrice: number = 0;
   totalQuantity: number = 0;
 
@@ -34,7 +30,6 @@ export class CheckoutComponent implements OnInit {
   shippingAddressStates: State[] = [];
   billingAddressStates: State[] = [];
 
-  // SA FORM BUILDER-OM CU ZAPRAVO DA PRAVIM FORMU
   constructor(private formBuilder: FormBuilder, 
     private formService: FormService,
     private cartService: CartService,
@@ -45,9 +40,7 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkoutFormGroup = this.formBuilder.group({
-      // OVO MI JE PRVA GRUPA SA KLJUCEM customer
       customer : this.formBuilder.group({
-        // SA FormControl SE POSTAVLJA VALIDACIJA ZA POLJA
         firstName: new FormControl('', [Validators.required, 
           Validators.minLength(2), 
           ShopValidators.notOnlyWhitespace]),
@@ -98,7 +91,6 @@ export class CheckoutComponent implements OnInit {
       })
     });
 
-    // U JAVASCRIPT MESECI IDU 0 ... 11, ZATO MORA +1
     const startMonth: number = new Date().getMonth() + 1;
     console.log(`startMonth: ${startMonth}`);
 
@@ -132,9 +124,8 @@ export class CheckoutComponent implements OnInit {
     console.log(`Handling the submit button`);
 
     if(this.checkoutFormGroup.invalid){
-      // AKO OZNACIM SVA POLJA KAO touched ONDA CE TO DA IZAZOVE ERROR MESSAGE
       this.checkoutFormGroup.markAllAsTouched();
-      return; // OVO JE STAVLJENO DA SE NE IZVRSAVA NISTA OD SLEDECEG JER JE PALA VALIDACIJA FORME
+      return;
     }
 
 
@@ -143,8 +134,6 @@ export class CheckoutComponent implements OnInit {
     // console.log("The shipping address country is " + this.checkoutFormGroup.get('shippingAddress')!.value.country.name);
     // console.log("The shipping address state is " + this.checkoutFormGroup.get('shippingAddress')!.value.state.name);
 
-
-    /////////////POPUNJAVAM SAMU PORUDZBINU/////////////
 
     let order = new Order();
     order.totalPrice = this.totalPrice;
@@ -181,11 +170,9 @@ export class CheckoutComponent implements OnInit {
 
     this.checkoutService.placeOrder(purchase).subscribe(
       {
-        // NAPRAVLJENE SU 2 "PUTANJE", AKO USPE JE NEXT A AKO NE USPE JE ERROR, PRI CEMU CE response DA BUDE ZAPRAVO JSON STRING SA orderNumber
         next: response => {
           alert(`Your order has been received.\nOrder tracking number: ${response.orderTrackingNumber}`);
 
-          // KADA PRODJE NARUDZBINA ONDA SE RESETUJE KORPA
           this.resetCart();
         },
         error: err => {
@@ -199,7 +186,6 @@ export class CheckoutComponent implements OnInit {
     if((event.target as HTMLInputElement).checked){
       this.checkoutFormGroup.controls['billingAddress'].setValue(this.checkoutFormGroup.controls['shippingAddress'].value);
 
-      // FIX ZA STATE DEO ZA Billing Address KADA SE KLIKNE CHECKBOX
       this.billingAddressStates = this.shippingAddressStates;
     }
     else{
@@ -209,7 +195,6 @@ export class CheckoutComponent implements OnInit {
   }
 
   handleMonthsAndYears() {
-    // PRISTUPAM GRUPI IZ FORME KOJA JE ZADUZENA ZA KREDITNU KARTICU KAKO BI PRISTUPAO VREDNOSTIMA KOJE SU UNESENE
     const formGroup= this.checkoutFormGroup.get('creditCard');
 
     let currentYear: number = new Date().getFullYear();
@@ -224,7 +209,6 @@ export class CheckoutComponent implements OnInit {
       startMonth = 1;
     }
 
-    // NA OSNOVU PODATKA ZA POCETNI MESEC, DOBIJAM OSTALE MESECE ZA DROP DOWN MENU
     this.formService.getCreditCardMonths(startMonth).subscribe(
       data => {
         console.log("Retrieved credit card months: " + JSON.stringify(data));
@@ -235,7 +219,6 @@ export class CheckoutComponent implements OnInit {
   }
 
   getStates(formGroupName: string) {
-    // POSLACE SE SHIPPING ADDRESS ILI BILLING ADDRESS
     const formGroup = this.checkoutFormGroup.get(formGroupName);
 
     const countryCode = formGroup!.value.country.code;
@@ -253,13 +236,11 @@ export class CheckoutComponent implements OnInit {
           this.billingAddressStates = data;
         }
 
-        // HOCU DA AUTOMATSKI IZABERE PRVI STATE KAD SE IZABERE DRZAVA
         formGroup!.get('state')!.setValue(data[0]);
       }
     );
   }
 
-  // OVO SU METODE ZA PRISTUPANJE POTREBNIH USLOVA ZA POLJA FORME, SVA POLJA ZA KOJA SAM STAVIO NEKI REQUIREMENT ONDA MORA DA IMA OVAKVA METODA
   get firstName(){
     return this.checkoutFormGroup.get('customer.firstName');
   }
@@ -329,8 +310,6 @@ export class CheckoutComponent implements OnInit {
   }
 
   reviewCartDetails() {
-    // SUBSCRIBE-UJEM ATRIBUTE OVE KOMPONENTE SA ONIM IZ CART SERVICE-A
-
     this.cartService.totalPrice.subscribe(
       data => this.totalPrice = data
     );
@@ -343,10 +322,8 @@ export class CheckoutComponent implements OnInit {
   resetCart() {
     this.cartService.cartItems = [];
 
-    // SALJE DA BUDE 0 SVIM SUBSCRIBER-IMA
     this.cartService.totalPrice.next(0);
 
-    // SALJE DA BUDE 0 SVIM SUBSCRIBER-IMA
     this.cartService.totalQuantity.next(0);
 
     this.checkoutFormGroup.reset();
