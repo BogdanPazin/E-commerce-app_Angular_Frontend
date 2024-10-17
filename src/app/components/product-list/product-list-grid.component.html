@@ -10,8 +10,6 @@
                 <div *ngFor="let product of products" class="col-md-3">
                     
                     <div class="product-box">
-
-                        <!-- IAKO NISAM IMAO U KLASI Product ATRIBUT ID, APLIKACIJA JE RADILA, PA SAM NAKNADNO DODAO EKSTENZIJU ANGULAR LANGUAGE SERVICE KOJI JE SAM NAPRAVIO TAJ ATRIBUT U KLASI, I NJEGOVA SVRHA JE DA NAZNACI DODATNE PROBLEME U PROJEKTU -->
                         <a routerLink="/products/{{ product.id }}">
                             <img src="{{ product.imageUrl }}" class="img-responsive" alt="">
                         </a>
@@ -27,18 +25,12 @@
 
                 </div>
 
-                <!-- AKO NEMA TRAZENIH PROIZVODA ONDA PRIKAZUJEM PORUKU KORISNIKU -->
-
-
-                <!-- '?' U KONDICIONALU SLUZI KAO ODBRANA OD SITUACIJA GDE products MOGU DA BUDU NULL OBJEKAT ILI AKO JE 
-                products.length == 0 -->
                 <div *ngIf="products?.length == 0" class="alert alert-warning col-md-12" role="alert">
                     No products found!
                 </div>
 
             </div>
 
-            <!-- OVDE JE ZA PAGINATION DA SE PRIKAZE NA SAMOM SAJTU -->
             <div class="footer-pagination">
                 
                 <div class="row">
@@ -53,23 +45,16 @@
 
                                 <div class="col-md-9" style="padding-left: 30%">
 
-
-                                    <!-- PODACI SA DESNE STRANE SU ATRIBUTI ProductListComponent, ZA PODATKE SA LEVE STRANE [(xxx)] OZNACAVA DVOSMERNU VEZU U SMISLU DA AKO KORISNIK IZVRSI PROMENU ONDA CE SE ONA ODNOSITI I U SAMOJ KOMPONENTI I OBRNUTO(AKO SE PROMENA ATRIBUTA IZVRSI U KOMPONENTI ONA CE SE VIDETI NA SAJTU) -->
-
-                                    <!-- OVAJ TAG JE OMOGUCEN UPOTREBOM COMPONENT FRAMEWORK-A ng-bootstrap  -->
                                     <ngb-pagination [(page)]="thePageNumber"
                                     [maxSize]="5"
                                     [boundaryLinks]="true"
                                     [pageSize]="thePageSize"
                                     [collectionSize]="theTotalElements"
                                     (pageChange)="listProducts()">
-                                    <!-- OZNAKA '(xxx)'' SE ODNOSI NA TO DA AKO KORISNIK IZVRSI PROMENU NA SAJTU ONDA CE SE ONA PRIMENITI U KOMPONENTI -->
 
                                     </ngb-pagination>
 
                                 </div>
-
-                                <!-- DODAJEM DEO GDE KORISNIK MOZE DA PODESI PO KOLIKO PREDMETA DA SE PRIKAZUJE -->
 
                                 <div class="col-md-3 mt-2" style="text-align: right;">
 
@@ -94,17 +79,11 @@
                                             50
                                         </option>
                                     </select>
-
                                 </div>
-
                             </div>
-
                         </div>
-
                 </div>
-
             </div>
-
         </div>
     </div>
 </div>
