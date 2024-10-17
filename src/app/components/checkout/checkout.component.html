@@ -1,10 +1,7 @@
 <div class="main-content page-m">
     <div class="section-content section-content-p30">
         <div class="container-fluid">
-            <!-- checkoutFormGroup JE IZ .ts FAJLA -->
-             <!-- ngSubmit CE SE POZVATI KAD SE KLIKNE NA BUTTON IZ FORME, I POZVACE SE ODGOVARAJUCA METODA -->
             <form [formGroup]="checkoutFormGroup" (ngSubmit)="onSubmit()">
-                <!-- customer JE KLJUC JEDNE GRUPE IZ .ts FAJLA -->
                 <div formGroupName="customer" class="form-area">
                     <h3>Customer</h3>
 
@@ -15,21 +12,17 @@
 
                         <div class="col-md-9">
                             <div class="input-space">
-                                <!-- firstName JE IZ .ts FAJLA -->
                                 <input formControlName="firstName" type="text">
 
-                                <!-- firstName!.invalid JE ZA VALIDACIJU(DA LI JE PAO ZA NEKE ZAHTEVE), dirty OZNACAVA AKO JE MENJANO NEKO POLJE, touched OZNACAVA DA LI JE POLJE 'IZGUBILO FOKUS' -->
                                 <div *ngIf="firstName!.invalid && (firstName!.dirty || firstName!.touched)" class="alert alert-danger mt-1">
                                     
                                     <div *ngIf="firstName!.errors!.required || firstName!.errors!.notOnlyWhitespace">
-                                        <!-- notOnlyWhitespace JE Validation Error Key iz ShopValidation KLASE KOJI JE VRACEN KAO return 'notOnlyWhitespace' -->
                                         First Name is required
                                     </div>
 
                                     <div *ngIf="firstName!.errors!.minlength">
                                         First Name must be at least 2 charactes long
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -42,7 +35,6 @@
 
                         <div class="col-md-9">
                             <div class="input-space">
-                                <!-- lastName JE IZ .ts FAJLA -->
                                 <input formControlName="lastName" type="text">
 
                                 <div *ngIf="lastName!.invalid && (lastName!.dirty || lastName!.touched)" class="alert alert-danger mt-1">
@@ -54,7 +46,6 @@
                                     <div *ngIf="lastName!.errors!.minlength">
                                         Last Name must be at least 2 charactes long
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -78,7 +69,6 @@
                                     <div *ngIf="email!.errors!.pattern">
                                         Email must follow a certain pattern
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -98,7 +88,6 @@
                             <div class="input-space">
                                 <select formControlName="country" (change)="getStates('shippingAddress')">
                                     <option *ngFor="let country of countries" [ngValue]="country">
-                                        <!-- ngValue SLUZI DA ZADRZI TRENUTNI Country OBJEKAT ZBOG PRISTUPANJA PODACIMA ZA TAJ OBJEKAT -->
                                         {{ country.name }}
                                     </option>
                                 </select>
@@ -109,7 +98,6 @@
                                         Country is required
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -133,9 +121,7 @@
                                     <div *ngIf="shippingAddressStreet!.errors!.minlength">
                                         Street must be at least 2 charactes long
                                     </div>
-
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -158,7 +144,6 @@
                                     <div *ngIf="shippingAddressCity!.errors!.minlength">
                                         City must be at least 2 charactes long
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -206,16 +191,11 @@
                                     <div *ngIf="shippingAddressZipCode!.errors!.minlength">
                                         Zip Code must be at least 2 charactes long
                                     </div>
-
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
-
-
-                <!-- CHECKBOX ZA SITUACIJU AKO SU ADRESE ZA NAPLATU I DOSTAVU ISTE-->
 
                 <div class="input-space">
                     <label class="au-checkbox">
@@ -239,7 +219,6 @@
                             <div class="input-space">
                                 <select formControlName="country" (change)="getStates('billingAddress')">
                                     <option *ngFor="let country of countries" [ngValue]="country">
-                                        <!-- ngValue SLUZI DA ZADRZI TRENUTNI Country OBJEKAT ZBOG Country Code -->
                                         {{ country.name }}
                                     </option>
                                 </select>
@@ -250,7 +229,6 @@
                                         Country is required
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -273,7 +251,6 @@
                                     <div *ngIf="billingAddressStreet!.errors!.minlength">
                                         Street must be at least 2 charactes long
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -297,7 +274,6 @@
                                     <div *ngIf="billingAddressCity!.errors!.minlength">
                                         City must be at least 2 charactes long
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -345,7 +321,6 @@
                                     <div *ngIf="billingAddressZipCode!.errors!.minlength">
                                         Zip Code must be at least 2 charactes long
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -397,7 +372,6 @@
                                     <div *ngIf="creditCardNameOnCard!.errors!.minlength">
                                         Name on card must be at least 2 charactes long
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -421,7 +395,6 @@
                                     <div *ngIf="creditCardNumber!.errors!.pattern">
                                         Credit card number must have 16 digits
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -445,7 +418,6 @@
                                     <div *ngIf="creditCardSecurityCode!.errors!.pattern">
                                         Security Code must have 3 numbers
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -482,11 +454,8 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
 
-
-                <!-- DETALJI O PORUDZBINI -->
                 <div class="form-area">
                     <h3>Review Order</h3>
 
@@ -494,8 +463,6 @@
                     <p>Shipping: FREE</p>
                     <p>Total Price: {{ totalPrice | currency:'USD' }}</p>
                 </div>
-
-                
 
                 <div class="text-center">
                     <button type="submit" class="btn btn-info">
