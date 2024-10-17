@@ -1,11 +1,5 @@
 <div class="form-header">
-    
-    <!-- #myInput JE TEMPLATE VARIJABLA, SA NJOM CU MOCI DA PRISTUPIM SAMOM TEKSTU KOJI KORISNIK UPISE U INPUT POLJE ZA SEARCH BAR -->
     <input #myInput class="au-input au-input-xl" type="text" placeholder="Search for products ..." (keyup.enter)="doSearch(myInput.value)"/>
-<!-- keyup.enter JE DEO EVENT BINDING-A I ON CEKA DA SE PRITISNE ENTER DA BI IZVRSIO METODU doSearch -->
-
-    
-<!-- EVENT BINDING SE RADI I ZA DUGME -->
     <button class="au-btn-submit" (click)="doSearch(myInput.value)">
         Search
     </button>
