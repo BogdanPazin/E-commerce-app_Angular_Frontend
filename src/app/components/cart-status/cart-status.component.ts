@@ -20,8 +20,6 @@ export class CartStatusComponent implements OnInit {
   }
 
   updateCartStatus() {
-    
-    // SUBSCRIBE-UJEM ATRIBUTE IZ OVE KOMPONENTE SA ONOM VREDNOSCU KOJA SE DOBIJA IZ CART SERVICE-A, TAKO DA CE OVDE DA SE PRIME TE VREDNOSTI IZ SERVICE-A
     this.cartService.totalPrice.subscribe(
       data => this.totalPrice = data
     );
