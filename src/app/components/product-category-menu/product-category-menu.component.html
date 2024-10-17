@@ -2,17 +2,12 @@
   <nav class="navbar-sidebar">
     <ul class="list-unstyled navbar-list">
       <li *ngFor="let productCategory of productCategories">
-        <!-- OVDE SE KAO PARAMETAR (ID) SALJE 1, I KADA KORISNIK KLIKNE NA LINK ONDA SE PRIMENJUJE CSS STIL
-         
-        "/category/1"
-
-        -->
+        
         <!-- <a routerLink="/category/{{ productCategory.id }}" routerLinkActive="active-link">
           {{ productCategory.categoryName }}
         </a> -->
 
 
-        <!-- OVO JE DODATO DA U LINKU BUDE UBACEN I NAZIV KATEGORIJE, TAKO JE UBACEN PARAMETAR name -->
         <a routerLink="/category/{{ productCategory.id }}/{{ productCategory.categoryName }}" routerLinkActive="active-link">
           {{ productCategory.categoryName }}
         </a>
