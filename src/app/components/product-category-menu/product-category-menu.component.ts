@@ -22,7 +22,6 @@ export class ProductCategoryMenuComponent implements OnInit {
   listProductCategories() {
     this.productService.getProductCategories().subscribe(
       data => {
-        // LOGUJEM PODATKE DOBIJENE OD SERVISA, POMOCU STRINGIFY TAKO DA DOBIJENI OBJEKAT PREDSTAVIM KAO JSON STRING
         console.log('Product Categories= ' + JSON.stringify(data));
         this.productCategories = data;
       }
