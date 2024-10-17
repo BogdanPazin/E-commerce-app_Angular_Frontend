@@ -19,7 +19,6 @@ export class SearchComponent implements OnInit {
   doSearch(value: String){
     console.log(`value=${value}`);
     
-    // SA OVIM SE ZOVE KREIRANA PUTANJA, KOJA CE SE OBRADJIVATI U KOMPONENTI ProductListComponent
     this.router.navigateByUrl(`/search/${value}`);
   }
 }
