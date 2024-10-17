@@ -1,7 +1,6 @@
 export class Product {
 
     constructor(
-        // id ATRIBUT JE DODAT OD STRANE ANGULAR LANGUAGE SERVICE-A
         public id: number,
         public sku: string, 
         public name: string, 
