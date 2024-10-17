@@ -17,15 +17,12 @@ export class FormService {
 
   }
 
-  // ANGULAR KOMPONENTA CE DA SE SUBSCRIBE-UJE NA OVU METODU STO ZNACI DA CE DOBIJATI PODATKE IZ OVE METODE
   getCreditCardMonths(startMonth: number): Observable<number[]>{
     let data: number[] = [];
 
     for(let month = startMonth; month <= 12; month++){
       data.push(month);
     }
-
-    // of OPERATOR PAKUJE OBJEKAT U OBSERVABLE
     return of(data);
   }
 
@@ -38,8 +35,6 @@ export class FormService {
     for(let year = startYear; year <= endYear; year++){
       data.push(year);
     }
-
-    // of OPERATOR PAKUJE OBJEKAT U OBSERVABLE
     return of(data);
   }
 
