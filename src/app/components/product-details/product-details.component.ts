@@ -12,7 +12,6 @@ import { CartItem } from '../../common/cart-item';
 })
 export class ProductDetailsComponent implements OnInit {
   
-  // DODAJE SE '!' DA BI NAZNACIO TYPESCRIPT-U DA SE NE DODELJUJE NULL
   product!: Product;
   
   constructor(private productService: ProductService, private cartService: CartService, private route: ActivatedRoute){
@@ -28,7 +27,6 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   handleProductDetails() {
-    // UZIMAM ID IZ PUTANJE, PRI CEMU MORA DA BUDE ISTI NAZIV OVDE I U SAMOJ PUTANJI KOJU SAM NAPRAVIO
     const productId: number = +this.route.snapshot.paramMap.get('id')!;
 
     this.productService.getProduct(productId).subscribe(
